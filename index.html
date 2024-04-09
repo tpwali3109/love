@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Proposal Page</title>
+	<style>
+		body {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh;
+			font-family: Arial, sans-serif;
+		}
+		#proposal {
+			text-align: center;
+		}
+		button {
+			margin: 10px;
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+            background-color: red;
+            color: #fff;
+		}
+		.no-button-clicked {
+			position: fixed;
+			bottom: 10px;
+			/* left: 50%; */
+            /* right: 50%; */
+			transform: translateX(-50%);
+			background-color: red;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<div id="proposal">
+		<h1>Will you marry me?</h1>
+		<button id="yes-button" >Yes</button>
+		<button id="no-button">No</button>
+	</div>
+
+	<script>
+        const noButton = document.getElementById("no-button");
+        const yesButton = document.getElementById("yes-button");
+        const noButtonClicked = document.createElement("button");
+        noButtonClicked.id = "no-button-clicked";
+        noButtonClicked.innerText = "No";
+        noButtonClicked.classList.add("no-button-clicked");
+        noButtonClicked.style.display = "none";
+        document.body.appendChild(noButtonClicked);
+    
+        let clickCount = 0;
+    
+        noButton.addEventListener("click", () => {
+            if (clickCount < 100) {
+                noButton.style.display = "none";
+                noButtonClicked.style.display = "block";
+                const randomX = Math.floor(Math.random() * (window.innerWidth - 100));
+                const randomY = Math.floor(Math.random() * (window.innerHeight - 100));
+                noButtonClicked.style.left = `${randomX}px`;
+                noButtonClicked.style.top = `${randomY}px`;
+                clickCount++;
+            }
+        });
+    
+        noButtonClicked.addEventListener("click", () => {
+            noButton.style.display = "block";
+        noButtonClicked.style.display = "none";
+        });
+    
+        yesButton.addEventListener("click", () => {
+            window.location.href = "yes.html";
+        });
+    </script>
+</body>
+</html>
